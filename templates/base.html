@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}StampColor{% endblock %}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+  <meta name="description" content="StampColor: estampacion y personalizacion textil para marcas, emprendimientos y empresas.">
+</head>
+<body class="bg-stone-950 text-stone-100 antialiased">
+  <div class="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(245,158,11,0.16),_transparent_30%),linear-gradient(180deg,_#0c0a09_0%,_#1c1917_100%)]">
+    {% include "components/header.html" %}
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+    {% include "components/footer.html" %}
+    {% include "components/whatsapp_button.html" %}
+  </div>
+</body>
+</html>
