@@ -1,10 +1,19 @@
 from pathlib import Path
+import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = "dev-secret-key"
-DEBUG = True
-ALLOWED_HOSTS = []
+SECRET_KEY = os.getenv("SECRET_KEY", "dev-secret-key")
+DEBUG = os.getenv("DEBUG", "True").lower() in {"1", "true", "yes", "on"}
+
+# Allow hosts from env in production and provide a Railway fallback.
+_env_hosts = [host.strip() for host in os.getenv("ALLOWED_HOSTS", "").split(",") if host.strip()]
+if _env_hosts:
+    ALLOWED_HOSTS = _env_hosts
+elif DEBUG:
+    ALLOWED_HOSTS = []
+else:
+    ALLOWED_HOSTS = [".up.railway.app", "localhost", "127.0.0.1"]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
